@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login - Infinitech</title>
+    <link rel="stylesheet" href="../static/style/styles.css">
+</head>
+
+{% extends 'base.html' %}
+{% set active_page = 'login' %}
+{% block header %}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <h1 class="login-register-header">Login</h1>
+                <form method="POST" action="{{ url_for('auth.login') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="email_id">Email Address</label>
+                        <input type="text" id="email_id" name="email_id" class="form-control mb-4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control mb-4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary login-button" id="loginButton">Login</button>
+                    </div>
+                    <div id="error-message" class="alert alert-danger {% if error_message %} d-block {% else %} d-none {% endif %} login-error-spacing">
+                        {{ error_message }}
+                    </div>
+                </form>
+                
+                <div class="custom-separator">
+                    <span class="linebreak tds-text--500" data-i18n-key="pageSeparatorOrLabel">Or</span>
+                </div>
+                <div>
+                    <a class="btn btn-primary register-button" href="{{ url_for('auth.register') }}">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+
+</html>

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Create Destination</h1>
+    <form method="POST" action="{{ url_for('destination.create') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control", placeholder="Enter destination name") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", placeholder="Enter description") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.currency.label(class="form-label") }}
+            {{ form.currency(class="form-control", placeholder="Enter currency code") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.image.label(class="form-label") }}
+            {{ form.image(class="form-control", id="eventMedia", multiple=true) }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Image Preview</label>
+            <img id="imagePreview" src="/static/image/placeholder-image.png" alt="Image Preview" style="max-width: 100%;">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Destination</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    // Your JavaScript code here
+
+    // Define your JavaScript functions and event handlers
+    function handleFileInputChange(event) {
+        const fileInput = document.getElementById('eventMedia');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const imageURL = URL.createObjectURL(file);
+
+            imagePreview.src = imageURL;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.src = '/static/image/placeholder-image.png';
+            imagePreview.style.display = 'block';
+        }
+    }
+
+    // Attach event listeners as needed
+    const fileInput = document.getElementById('eventMedia');
+    fileInput.addEventListener('change', handleFileInputChange);
+
+    const form = document.getElementById('create-form');
+    form.addEventListener('submit', submitForm);
+
+    // You can add more event listeners and functions as required
+</script>
+
+{% endblock %}

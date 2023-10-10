@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+
+<div class="container">  
+    <div class="row mt-5 mb-3">  
+        <div class="col-md-6"> 
+            <h1 class="mb-0">{{ destination.name }}</h1>  
+            <p>Popular Destination</p>
+            <img src="{{ destination.image }}" alt="{{ destination.name }}" class="img-fluid">
+            <a href="#" class="btn btn-danger">Book Now</a> 
+        </div>  
+ 
+        <div class="col-md-6 text-right"> 
+            {{ render_form(form, "/destinations/{0}/comment".format(destination.id)) }}
+            <div class="row">  
+              <div class="col-md-12">  
+                  <h2>Comments</h2> 
+              </div>  
+          </div>  
+      
+          {% for comment in destination.comments %}
+          <div class="row border-bottom">
+              <div class="col-md-12">  
+                  <b>{{ comment.user.name }} <span class="ml-2 text-muted">January 2024</span></b>
+                  <p>{{ comment.text }}</p>  
+              </div> 
+          </div>  
+          {% endfor %} 
+        </div>  
+    </div>  
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="card shadow p-5 mb-5 bg-light">
+                    <h1 class="text-center mb-3">Find our best travel deals</h1>
+                    <form class="form-inline d-flex flex-nowrap" action="#">
+                        <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+                        <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-10">
+                <div class="media border p-3 d-flex justify-content-start">
+                    <img class="align-self-center me-3" style="max-width:120px"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Earth_Western_Hemisphere_transparent_background.png/600px-Earth_Western_Hemisphere_transparent_background.png"
+                        alt="Planet Earth">
+                    <div class="align-self-center media-body">
+                        <h5 class="mt-0">Find the best destinations on earth!!!</h5>
+                        <p class="d-none d-sm-block">Unlock a world of adventure and exploration by joining us now. Dive into an extraordinary journey filled with stunning destinations, vibrant cultures, and unforgettable experiences. Your dream destinations are just a click away. Don't miss out on the opportunity to explore the best that our planet has to offer. Join us now and embark on the adventure of a lifetime</p>
+                        <a href="#" class="btn btn-primary">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for destination in destinations %}
+            <div class="col-md-4 mb-3"> <!-- Limit to 3 destinations per row (col-md-4) -->
+                <div class="card mx-3">
+                    <img class="card-img-top" src="{{ destination.image }}" alt="destination picture">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>{{ destination.name }}</h5>
+                            <p class="card-text">{{ destination.description }}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('destination.show', id=destination.id) }}" class="btn btn-danger">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}
+</html>
